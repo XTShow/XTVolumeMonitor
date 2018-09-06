@@ -42,15 +42,13 @@ XTKVOContext(XTShow);
  为了让音量变化的监听生效而提前播放一段音频
  */
 -(void)preplayAudioForVolumeChangeNoti{
-    
+
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];//保证不会打断第三方app的音频播放
     NSString *itemVideoPath = [[NSBundle mainBundle] pathForResource:@"detection" ofType:@"aiff"];
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:itemVideoPath] options:nil];
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-    AVPlayer *player = [AVPlayer playerWithPlayerItem:playerItem];
+    AVPlayer *player = [AVPlayer playerWithURL:[NSURL URLWithString:itemVideoPath]];
     self.player = player;
     [player play];
-    
+
 }
 
 #pragma mark - 判断当前是否为静音
